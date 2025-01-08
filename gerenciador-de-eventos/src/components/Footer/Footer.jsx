@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';  // Importação do Link para navegação interna
 import './Footer.css';
 
 const Footer = () => {
@@ -7,14 +8,14 @@ const Footer = () => {
             <div className="footer-content">
                 <p>&copy; 2025 Gerenciador de Eventos. Todos os direitos reservados.</p>
                 <nav className="footer-nav">
-                    <a href="/about">Sobre</a>
-                    <a href="/contact">Contato</a>
-                    <a href="/privacy">Política de Privacidade</a>
-                    <a href="/linkdin">Linkedin</a>
-                    <a href="/github">Github</a>
-                    <a href="/instagram">Instagram</a>
-                    <a href="/email">Email</a>
-                </nav>
+                    <Link to="/about" aria-label="Sobre">Sobre</Link>
+                    <Link to="/contact" aria-label="Contato">Contato</Link>
+                    <Link to="/privacy" aria-label="Política de Privacidade">Política de Privacidade</Link>
+                    <Link to="/linkedin" aria-label="LinkedIn">Linkedin</Link>
+                    <Link to="/github" aria-label="GitHub">Github</Link>
+                    <Link to="/instagram" aria-label="Instagram">Instagram</Link>
+                    <Link to="/email" aria-label="Email">Email</Link>
+                </nav> 
             </div>
         </footer>
     );

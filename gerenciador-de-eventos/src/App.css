@@ -1,0 +1,150 @@
+/* App.css */
+
+/* Estilo geral da aplicação */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Definindo a altura mínima para o conteúdo */
+html, body, #root {
+    height: 100%;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #4CAF50;
+    padding: 1rem;
+    color: white;
+    text-align: center;
+}
+
+.navbar h1 {
+    margin: 0;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Estilos para a página inicial */
+.homepage {
+    padding: 2rem;
+    text-align: center;
+}
+
+.homepage h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.homepage p {
+    font-size: 1.2rem;
+}
+
+/* LoginPage */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.login-page form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.4rem 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* CadastroPage */
+.cadastro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.cadastro-container form {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.4rem 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button-cadastro {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button-cadastro:hover {
+    background-color: #45a049;
+}
+
+/* EventPage */
+.event-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.event-page h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}

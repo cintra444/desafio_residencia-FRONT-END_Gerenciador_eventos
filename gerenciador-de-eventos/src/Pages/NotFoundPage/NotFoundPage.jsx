@@ -1,16 +1,21 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import Footer from '../../components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import './NotFoundPage.css';
 
 const NotFoundPage = () => {
+    const navigate = useNavigate();
+
     return (
         <>
-            <Navbar />
-            <div>
-                <h1>404 - Not Found</h1>
+            
+            <div className="notfound-container">
+                <h1>404 - Página Não Encontrada</h1>
                 <p>A página que você está procurando não existe.</p>
+                <button className="go-home-btn" onClick={() => navigate('/')}>
+                    Voltar para a página inicial
+                </button>
             </div>
-            <Footer />
+           
         </>
     );
 };

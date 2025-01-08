@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';  // Adicionado para fazer requisições à API
 import './CadastroPage.css';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
 
 const CadastroPage = () => {
     const [formData, setFormData] = useState({
@@ -19,8 +18,8 @@ const CadastroPage = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
-       e.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         const { nome, email, senha, confirmarSenha } = formData;
 
         if (!nome || !email || !senha || !confirmarSenha) {
@@ -30,19 +29,35 @@ const CadastroPage = () => {
 
         if (senha !== confirmarSenha) {
             alert('Senhas não coincidem!');
+            return;
         }
 
         if (senha.length < 6) {
             alert('Senha deve ter no mínimo 6 caracteres!');
+            return;
         }
 
-        alert('Cadastro realizado com sucesso!');
-        navigate('/login');
+        try {
+            // Requisição para o Mock API para cadastrar o usuário
+            const response = await axios.post('https://mockapi.com/users', {
+                nome,
+                email,
+                senha
+            });
+
+            if (response.status === 201) {
+                alert('Cadastro realizado com sucesso!');
+                navigate('/login');
+            }
+        } catch (error) {
+            alert('Ocorreu um erro ao cadastrar o usuário!');
+            console.error(error);
+        }
     };
 
     return (
         <>
-            <Navbar />
+            
             <div className="cadastro-container">
                 <h2>Cadastro</h2>
                 <form onSubmit={handleSubmit}>
@@ -93,7 +108,7 @@ const CadastroPage = () => {
                     <button type="submit" className='button-cadastro'>Cadastrar</button>
                 </form>
             </div>
-            <Footer />
+            
         </>
     );
 };

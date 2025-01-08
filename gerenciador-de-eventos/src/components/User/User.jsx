@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import EventoModal from '../EventoModal/EventoModal';
 import './User.css';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
 
 const User = () => {
     const [eventos, setEventos] = useState([]);
@@ -11,10 +9,16 @@ const User = () => {
 
     useEffect(() => {
         const fetchEventos = async () => {
-            // Faz uma chamada para a API para obter os eventos
-            const response = await fetch('/api/eventos');
-            const data = await response.json();
-            setEventos(data);
+            try {
+                const response = await fetch('/api/eventos');
+                if (!response.ok) {
+                    throw new Error('Falha ao carregar eventos');
+                }
+                const data = await response.json();
+                setEventos(data);
+            } catch (error) {
+                console.error('Erro ao buscar eventos:', error);
+            }
         };
 
         fetchEventos();
@@ -26,7 +30,9 @@ const User = () => {
     };
 
     const handleDelete = (id) => {
-        setEventos(eventos.filter(evento => evento.id !== id));
+        if (window.confirm('Você tem certeza que deseja excluir este evento?')) {
+            setEventos(eventos.filter(evento => evento.id !== id));
+        }
     };
 
     const handleAddEvento = () => {
@@ -35,6 +41,11 @@ const User = () => {
     };
 
     const handleSaveEvento = (evento) => {
+        if (!evento.nome || !evento.data || !evento.localizacao || !evento.imagem) {
+            alert('Por favor, preencha todos os campos!');
+            return;
+        }
+
         if (selectedEvento) {
             setEventos(eventos.map(e => (e.id === evento.id ? evento : e)));
         } else {
@@ -45,7 +56,7 @@ const User = () => {
 
     return (
         <>
-            <Navbar />
+           
             <div className="user-page">
                 <h1>Meus Eventos</h1>
                 <button onClick={handleAddEvento}>Adicionar Evento</button>
@@ -69,7 +80,7 @@ const User = () => {
                     />
                 )}
             </div>
-            <Footer />
+           
         </>
     );
 };

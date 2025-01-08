@@ -21,7 +21,7 @@ time, mark, audio, video {
     vertical-align: baseline;
 }
 
-
-.body {
+/* Correção para o body */
+body {
     font-family: "Roboto", sans-serif;
 }

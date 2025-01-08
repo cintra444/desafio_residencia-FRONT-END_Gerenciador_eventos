@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import './EventoModal.css';
-import Footer from '../Footer/Footer';
-import Navbar from '../Navbar/Navbar';
 
 const EventoModal = ({ show, handleClose, handleSave }) => {
     const [evento, setEvento] = useState({
@@ -21,42 +19,48 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
     };
 
     const handleSubmit = (e) => {
-         const { nome, data, localizacao, imagem } = evento;
-         if (nome && data && localizacao && imagem) {
-            handleSave(evento);
-            handleClose();
+        e.preventDefault(); // Evita recarregamento da página
+
+        const { nome, data, localizacao, imagem } = evento;
+        
+        if (nome && data && localizacao && imagem) {
+            // Cria o evento com ID baseado no timestamp (não é ideal para produção, mas pode servir aqui)
+            const novoEvento = { 
+                id: Date.now(),
+                nome: nome, 
+                data: data, 
+                localizacao: localizacao, 
+                imagem: imagem
+            };
+            
+            // Chama a função handleSave passando o novo evento
+            handleSave(novoEvento);
+            handleClose(); // Fecha o modal após salvar
         } else {
             alert('Preencha todos os campos!');
-            return;
         }
-        const novoEvento = { 
-            id: Date.now(),
-            nome: nome, 
-            data: data, 
-            localizacao: localizacao, 
-            imagem: imagem ,
-        };
-        handleSave(novoEvento);
     };
-
 
     return (
         <>
-        <Navbar/>
-        <div className='evento-modal'>
-            <div className='evento-modal-content'>
-                <h2>Novo Evento</h2>
-                <div className='evento-modal-body'>
-                    <label>Nome do Evento</label>
-                    <input
-                        type='text'
-                        value={evento.nome}
-                        onChange={handleChange} 
-                    />
+            
+            <div className='evento-modal'>
+                <div className='evento-modal-content'>
+                    <h2>Novo Evento</h2>
+                    <div className='evento-modal-body'>
+                        <label>Nome do Evento</label>
+                        <input
+                            type='text'
+                            name='nome'
+                            value={evento.nome}
+                            onChange={handleChange}
+                        />
+                    </div>
                     <div className='evento-modal-body'>
                         <label>Data do Evento</label>
                         <input
                             type='date'
+                            name='data'
                             value={evento.data}
                             onChange={handleChange}
                         />
@@ -65,6 +69,7 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
                         <label>Localização do Evento</label>
                         <input
                             type='text'
+                            name='localizacao'
                             value={evento.localizacao}
                             onChange={handleChange}
                         />
@@ -73,6 +78,7 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
                         <label>Imagem do Evento</label>
                         <input
                             type='file'
+                            name='imagem'
                             onChange={handleImageChange}
                         />
                     </div>
@@ -82,9 +88,8 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
                     </div>
                 </div>
             </div>
-        </div>
-        <Footer/>
-                            </>
+          
+        </>
     );
 };
 

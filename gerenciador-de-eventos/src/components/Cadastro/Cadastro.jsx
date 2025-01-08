@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../Navbar/Navbar';
-import Footer from '../Footer/Footer';
+import { createUser, updateUser } from '../../services/api';  // Importando funções da API
+
 const Cadastro = ({ user }) => {
     const [formData, setFormData] = useState({
         name: '',
@@ -35,33 +35,42 @@ const Cadastro = ({ user }) => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (user) {
-            // Update usuario
-            const updatedUser = {
-                name: formData.name,
-                email: formData.email,
-                image: formData.image,
-            };
-            localStorage.setItem('user', JSON.stringify(updatedUser));
-        } else {
-            // Cria um novo usuario
-            const newUser = {
-                name: formData.name,
-                email: formData.email,
-                password: formData.password,
-                image: formData.image,
-            };
-            localStorage.setItem('user', JSON.stringify(newUser));
-        }
 
-        console.log(formData);
+        if (user) {
+            // Atualizar o usuário
+            try {
+                const updatedUser = {
+                    name: formData.name,
+                    email: formData.email,
+                    image: formData.image,
+                };
+                await updateUser(user.id, updatedUser); // Passando o ID do usuário
+                console.log("Usuário atualizado");
+            } catch (error) {
+                console.error("Erro ao atualizar o usuário:", error);
+            }
+        } else {
+            // Criar novo usuário
+            try {
+                const newUser = {
+                    name: formData.name,
+                    email: formData.email,
+                    password: formData.password,
+                    image: formData.image,
+                };
+                await createUser(newUser);
+                console.log("Novo usuário criado");
+            } catch (error) {
+                console.error("Erro ao criar o usuário:", error);
+            }
+        }
     };
 
     return (
         <>
-            <Navbar />
+
             <div>
                 <h2>Cadastro</h2>
                 <form onSubmit={handleSubmit}>
@@ -103,7 +112,7 @@ const Cadastro = ({ user }) => {
                     <button type="submit">Salvar</button>
                 </form>
             </div>
-            <Footer />
+
         </>
     );
 };
