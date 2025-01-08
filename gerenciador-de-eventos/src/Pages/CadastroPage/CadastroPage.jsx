@@ -43,7 +43,7 @@ const CadastroPage = () => {
                         name="nome"
                         value={formData.nome}
                         onChange={(e) => setFormData({ ...formData, nome: e.target.value })}
-                        placeholder='Digite seu nome'
+                        placeholder="Digite seu nome"
                         required
                     />
                 </div>
@@ -54,7 +54,7 @@ const CadastroPage = () => {
                         name="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder='Digite seu email'
+                        placeholder="Digite seu email"
                         required
                     />
                 </div>
@@ -65,7 +65,7 @@ const CadastroPage = () => {
                         name="senha"
                         value={formData.senha}
                         onChange={(e) => setFormData({ ...formData, senha: e.target.value })}
-                        placeholder='Digite sua senha'
+                        placeholder="Digite sua senha"
                         required
                     />
                 </div>
@@ -76,11 +76,11 @@ const CadastroPage = () => {
                         name="confirmarSenha"
                         value={formData.confirmarSenha}
                         onChange={(e) => setFormData({ ...formData, confirmarSenha: e.target.value })}
-                        placeholder='Confirme sua senha'
+                        placeholder="Confirme sua senha"
                         required
                     />
                 </div>
-                <button type="submit">Cadastrar</button>
+                <button type="submit" className='button-cadastro'>Cadastrar</button>
             </form>
         </div>
     );
