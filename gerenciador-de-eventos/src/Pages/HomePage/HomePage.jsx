@@ -1,8 +1,12 @@
 import React from 'react';
 import './HomePage.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const HomePage = () => {
     return (
+        <>
+        <Navbar />
         <div className="homepage">
             <h1>Bem-vindo ao Gerenciador de Eventos</h1>
             <p>
@@ -10,6 +14,8 @@ const HomePage = () => {
                 Aqui você pode criar, editar e visualizar eventos de forma simples e intuitiva.
             </p>
         </div>
+        <Footer/>   
+        </>
     );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import Navbar from '../../components/Navbar/Navbar';
+import Footer from '../../components/Footer/Footer';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -27,6 +29,8 @@ const LoginPage = () => {
     };
 
     return (
+        <>
+        <Navbar/>
         <div className="login-page">
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
@@ -68,6 +72,8 @@ const LoginPage = () => {
             >Cadastrar Administrador    
             </button>
         </div>
+        <Footer/>
+        </>
     );
 };
 

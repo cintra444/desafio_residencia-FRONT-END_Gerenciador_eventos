@@ -9,9 +9,11 @@ const Navbar = () => {
                 <Link to="/">Gerenciador de Eventos</Link>
             </div>
             <div className="navbar-links">
+                <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/cadastro">Cadastro</Link>
                 <Link to="/eventos">Eventos</Link>
+                <Link to="/">Sair</Link>
             </div>
         </nav>
     );

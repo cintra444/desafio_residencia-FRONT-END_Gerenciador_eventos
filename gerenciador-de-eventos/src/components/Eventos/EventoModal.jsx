@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import './EventoModal.css';
+import Footer from '../Footer/Footer';
+import Navbar from '../Navbar/Navbar';
 
 const EventoModal = ({ show, handleClose, handleSave }) => {
     const [evento, setEvento] = useState({
@@ -11,23 +12,37 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
     });
 
     const handleChange = (e) => {
-        if (!nome || !data || !localizacao) {
+        const { name, value } = e.target;
+        setEvento({ ...evento, [name]: value });
+    };
+
+    const handleImageChange = (e) => {
+        setEvento({ ...evento, imagem: e.target.files[0] });
+    };
+
+    const handleSubmit = (e) => {
+         const { nome, data, localizacao, imagem } = evento;
+         if (nome && data && localizacao && imagem) {
+            handleSave(evento);
+            handleClose();
+        } else {
             alert('Preencha todos os campos!');
             return;
         }
-
-        const novoEvento = {
+        const novoEvento = { 
             id: Date.now(),
-            nome,
-            data,
-            localizacao,
-            imagem,
+            nome: nome, 
+            data: data, 
+            localizacao: localizacao, 
+            imagem: imagem ,
         };
-
         handleSave(novoEvento);
     };
 
+
     return (
+        <>
+        <Navbar/>
         <div className='evento-modal'>
             <div className='evento-modal-content'>
                 <h2>Novo Evento</h2>
@@ -35,39 +50,41 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
                     <label>Nome do Evento</label>
                     <input
                         type='text'
-                        value={nome}
-                        onChange={(e) => setEvento({ ...evento, nome: e.target.value })}
+                        value={evento.nome}
+                        onChange={handleChange} 
                     />
                     <div className='evento-modal-body'>
                         <label>Data do Evento</label>
                         <input
                             type='date'
-                            value={data}
-                            onChange={(e) => setEvento({ ...evento, data: e.target.value })}
+                            value={evento.data}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className='evento-modal-body'>
                         <label>Localização do Evento</label>
                         <input
                             type='text'
-                            value={localizacao}
-                            onChange={(e) => setEvento({ ...evento, localizacao: e.target.value })}
+                            value={evento.localizacao}
+                            onChange={handleChange}
                         />
                     </div>
                     <div className='evento-modal-body'>
                         <label>Imagem do Evento</label>
                         <input
                             type='file'
-                            onChange={(e) => setEvento({ ...evento, imagem: e.target.files[0] })}
+                            onChange={handleImageChange}
                         />
                     </div>
                     <div className='evento-modal-actions'>
-                        <button className='modal-button' onClick={() => handleSave(evento)}>Salvar</button>
+                        <button className='modal-button' onClick={handleSubmit}>Salvar</button>
                         <button className='modal-button-close' onClick={handleClose}>Cancelar</button>
                     </div>
                 </div>
             </div>
         </div>
+        <Footer/>
+                            </>
     );
 };
 
