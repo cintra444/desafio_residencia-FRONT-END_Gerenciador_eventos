@@ -1,38 +1,19 @@
 /* HomePage.css */
-
 .homepage {
+    padding: 20px;
     text-align: center;
-    padding: 50px;
-    background-color: #f4f4f9;
 }
 
-.homepage h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-}
-
-.homepage p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    color: #555;
-}
-
-.homepage-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.button {
-    background-color: #0066cc;
-    color: white;
+.homepage-buttons .button {
+    margin: 10px;
     padding: 10px 20px;
-    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
     text-decoration: none;
-    font-size: 1em;
-    transition: background-color 0.3s;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.button:hover {
-    background-color: #004d99;
+.homepage-buttons .button:hover {
+    background-color: #45a049;
 }

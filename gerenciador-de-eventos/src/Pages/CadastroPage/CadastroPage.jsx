@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';  // Adicionado para fazer requisições à API
+import axios from 'axios';
 import './CadastroPage.css';
 
 const CadastroPage = () => {
@@ -10,6 +10,9 @@ const CadastroPage = () => {
         senha: '',
         confirmarSenha: ''
     });
+
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const navigate = useNavigate();
 
@@ -38,8 +41,10 @@ const CadastroPage = () => {
         }
 
         try {
-            // Requisição para o Mock API para cadastrar o usuário
-            const response = await axios.post('https://mockapi.com/users', {
+            setLoading(true);
+            setError(null);
+
+            const response = await axios.post('/api/cadastro', {
                 nome,
                 email,
                 senha
@@ -52,15 +57,18 @@ const CadastroPage = () => {
         } catch (error) {
             alert('Ocorreu um erro ao cadastrar o usuário!');
             console.error(error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
         <>
-            
+
             <div className="cadastro-container">
                 <h2>Cadastro</h2>
                 <form onSubmit={handleSubmit}>
+                    {error && <p className="error-message">{error}</p>}
                     <div className="input-group">
                         <label>Nome</label>
                         <input
@@ -105,10 +113,12 @@ const CadastroPage = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className='button-cadastro'>Cadastrar</button>
+                    <button type="submit" className='button-cadastro' disabled={loading}>
+                        {loading ? 'Cadastrando...' : 'Cadastrar'}
+                    </button>
                 </form>
             </div>
-            
+
         </>
     );
 };

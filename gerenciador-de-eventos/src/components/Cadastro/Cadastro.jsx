@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { createUser, updateUser } from '../../services/api';  // Importando funções da API
+import React, { useState } from 'react';
+import { createAdmin } from '../../services/api';  
 
-const Cadastro = ({ user }) => {
+const Cadastro = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
         image: null,
     });
-
-    useEffect(() => {
-        if (user) {
-            setFormData({
-                name: user.name,
-                email: user.email,
-                password: '',
-                image: user.image,
-            });
-        }
-    }, [user]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -38,82 +27,64 @@ const Cadastro = ({ user }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (user) {
-            // Atualizar o usuário
-            try {
-                const updatedUser = {
-                    name: formData.name,
-                    email: formData.email,
-                    image: formData.image,
-                };
-                await updateUser(user.id, updatedUser); // Passando o ID do usuário
-                console.log("Usuário atualizado");
-            } catch (error) {
-                console.error("Erro ao atualizar o usuário:", error);
-            }
-        } else {
-            // Criar novo usuário
-            try {
-                const newUser = {
-                    name: formData.name,
-                    email: formData.email,
-                    password: formData.password,
-                    image: formData.image,
-                };
-                await createUser(newUser);
-                console.log("Novo usuário criado");
-            } catch (error) {
-                console.error("Erro ao criar o usuário:", error);
-            }
+        const form = new FormData();
+        form.append('name', formData.name);
+        form.append('email', formData.email);
+        form.append('password', formData.password);
+        if (formData.image) {
+            form.append('image', formData.image);
+        }
+
+        try {
+            await createAdmin(form);  // Apenas criando um novo administrador
+            console.log("Novo administrador criado");
+        } catch (error) {
+            console.error("Erro ao criar administrador:", error);
         }
     };
 
     return (
-        <>
-
-            <div>
-                <h2>Cadastro</h2>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Nome:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Email:</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Senha:</label>
-                        <input
-                            type="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Imagem:</label>
-                        <input
-                            type="file"
-                            name="image"
-                            onChange={handleImageChange}
-                        />
-                    </div>
-                    <button type="submit">Salvar</button>
-                </form>
-            </div>
-
-        </>
+        <div className="container">
+            <h2>Cadastro de Administrador</h2>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Nome:</label>
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Email:</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Senha:</label>
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label>Imagem:</label>
+                    <input
+                        type="file"
+                        name="image"
+                        onChange={handleImageChange}
+                    />
+                </div>
+                <button type="submit">Salvar</button>
+            </form>
+        </div>
     );
 };
 

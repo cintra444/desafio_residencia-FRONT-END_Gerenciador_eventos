@@ -1,29 +1,59 @@
+/* Estilo para a página de erro 404 */
 .notfound-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 100px auto;
     text-align: center;
-    padding: 50px;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-    font-size: 3rem;
-    color: #d9534f;
+.notfound-container h1 {
+    font-size: 48px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
-p {
-    font-size: 1.2rem;
-    color: #555;
+.notfound-container p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
 }
 
 .go-home-btn {
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    background-color: #0066cc;
+    padding: 15px 30px;
+    background-color: #007bff;
     color: white;
+    font-size: 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .go-home-btn:hover {
-    background-color: #004d99;
+    background-color: #0056b3;
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 500px) {
+    .notfound-container {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .notfound-container h1 {
+        font-size: 36px;
+    }
+
+    .notfound-container p {
+        font-size: 16px;
+    }
+
+    .go-home-btn {
+        font-size: 16px;
+    }
 }

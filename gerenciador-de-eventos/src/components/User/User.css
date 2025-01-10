@@ -1,58 +1,92 @@
-/* User.css */
-
-.user-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.user-page {
+    font-family: Arial, sans-serif;
     padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.user-header {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+h1 {
+    text-align: center;
     color: #333;
 }
 
-.user-details {
-    width: 100%;
-    max-width: 600px;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.user-details p {
-    margin: 5px 0;
-    color: #666;
-}
-
-.user-actions {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 600px;
-}
-
-.user-actions button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.user-actions .edit-button {
+.add-event-button {
+    display: inline-block;
     background-color: #4CAF50;
     color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-left: 10px;
 }
 
-.user-actions .delete-button {
+.add-event-button:hover {
+    background-color: #45a049;
+}
+
+.eventos-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.evento-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 200px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.evento-card:hover {
+    transform: scale(1.05);
+}
+
+.evento-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.evento-card h2 {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.evento-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+.edit-btn, .delete-btn {
     background-color: #f44336;
     color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+.delete-btn {
+    background-color: #ff5722;
+}
+
+.delete-btn:hover {
+    background-color: #e64a19;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';  // Importação do Link para navegação interna
+import { Link } from 'react-router-dom';  
 import './Footer.css';
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
                     <Link to="/contact" aria-label="Contato">Contato</Link>
                     <Link to="/privacy" aria-label="Política de Privacidade">Política de Privacidade</Link>
                     <Link to="/linkedin" aria-label="LinkedIn">Linkedin</Link>
-                    <Link to="/github" aria-label="GitHub">Github</Link>
+                    <Link to="/github" aria-label="GitHub">GitHub</Link>
                     <Link to="/instagram" aria-label="Instagram">Instagram</Link>
                     <Link to="/email" aria-label="Email">Email</Link>
                 </nav> 

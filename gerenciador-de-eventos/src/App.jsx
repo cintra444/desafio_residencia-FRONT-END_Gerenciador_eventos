@@ -5,11 +5,11 @@ import AppRoutes from './routes/AppRoutes';
 export default function App() {
   return (
     <>
-      <div>
-        <Navbar />
+      <Navbar />
+      <main>
         <AppRoutes />
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }

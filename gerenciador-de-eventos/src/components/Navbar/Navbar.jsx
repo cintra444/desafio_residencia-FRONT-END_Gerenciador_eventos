@@ -1,13 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 
 const Navbar = () => {
-    // Função para realizar logout
+    const navigate = useNavigate();
+
+    
     const handleLogout = () => {
-        localStorage.removeItem('user'); // Limpa o usuário do localStorage
-        window.location.reload(); // Redefine a página (opcional, dependendo do seu fluxo)
+        localStorage.removeItem('admin'); 
+        navigate('/login'); 
     };
+
+    // Verifica se o administrador está logado
+    const isAuthenticated = localStorage.getItem('admin');
 
     return (
         <nav className="navbar">
@@ -16,10 +21,15 @@ const Navbar = () => {
             </div>
             <div className="navbar-links">
                 <Link to="/" aria-label="Página inicial">Home</Link>
-                <Link to="/eventos" aria-label="Eventos">Eventos</Link>
-                <Link to="/login" aria-label="Login">Login</Link>
-                <Link to="/cadastro" aria-label="Cadastro">Cadastro</Link>
-                <button onClick={handleLogout} className="navbar-logout" aria-label="Sair">Sair</button>
+                {isAuthenticated && <Link to="/eventos" aria-label="Eventos">Eventos</Link>}
+                {!isAuthenticated ? (
+                    <>
+                        <Link to="/login" aria-label="Login">Login</Link>
+                        <Link to="/cadastro" aria-label="Cadastro">Cadastro</Link>
+                    </>
+                ) : (
+                    <button onClick={handleLogout} className="navbar-logout" aria-label="Sair">Sair</button>
+                )}
             </div>
         </nav>
     );

@@ -1,43 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { getEventoById } from '../service/api'; // Importando a função para buscar evento
+import './EventPage.css';
 
 const EventPage = () => {
-    const { id } = useParams(); // Obtém o ID do evento da URL
+    const { id } = useParams();
     const [evento, setEvento] = useState(null);
 
     useEffect(() => {
-        // Função para buscar o evento
         const fetchEventoDetails = async () => {
             try {
-                const response = await axios.get(`https://mockapi.com/eventos/${id}`);
-                setEvento(response.data); // Armazena os dados do evento
+                const data = await getEventoById(id); // Usando a função do api.js
+                setEvento(data);
             } catch (error) {
                 console.error('Erro ao buscar detalhes do evento:', error);
             }
         };
 
         fetchEventoDetails();
-    }, [id]); // A requisição será feita sempre que o ID mudar
+    }, [id]);
 
     if (!evento) {
-        return <div>Carregando...</div>; // Exibe um texto enquanto os dados estão sendo carregados
+        return <div>Carregando...</div>;
     }
 
     return (
-        <>
-          
-            <div className="event-page">
-                <h1>Detalhes do Evento: {evento.nome}</h1>
-                <p><strong>Data:</strong> {evento.data}</p>
-                <p><strong>Localização:</strong> {evento.localizacao}</p>
-                <div>
-                    <img src={evento.imagem} alt={evento.nome} />
-                </div>
-                <p><strong>Descrição:</strong> {evento.descricao}</p>
+        <div className="event-page">
+            <h1>Detalhes do Evento: {evento.nome}</h1>
+            <p><strong>Data:</strong> {evento.data}</p>
+            <p><strong>Localização:</strong> {evento.localizacao}</p>
+            <div>
+                <img src={evento.imagem} alt={evento.nome} />
             </div>
-         
-        </>
+            <p><strong>Descrição:</strong> {evento.descricao}</p>
+        </div>
     );
 };
 

@@ -1,60 +1,80 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { getEventos, excluirEvento, criarEvento } from '../../services/api';
+import EventoItem from './EventoItem';
+import EventoModal from './EventoModal';
 import './EventoList.css';
 
-// Configura o axios para usar a URL base da Mock API
-axios.defaults.baseURL = 'https://your-mock-api-url.mockapi.io'; // Altere com a URL do seu Mock API
-
-const EventoList = () => {
+const EventoList = ({ adminId }) => {
     const [eventos, setEventos] = useState([]);
-    const [loading, setLoading] = useState(true);  // Para indicar carregamento
-    const [error, setError] = useState(null);  // Para erros
+    const [modalShow, setModalShow] = useState(false);  // Controle de exibição do modal
 
     useEffect(() => {
-        // Requisição para buscar eventos
-        axios.get('/api/eventos') // Use o endpoint correto da Mock API
-            .then(response => {
-                setEventos(response.data);
-                setLoading(false);  // Finaliza o carregamento
-            })
-            .catch(error => {
-                console.error('There was an error fetching the events!', error);
-                setError('Erro ao carregar eventos');
-                setLoading(false);
-            });
-    }, []);
+        const fetchEventos = async () => {
+            try {
+                const eventosData = await getEventos(adminId);
+                setEventos(eventosData);
+            } catch (error) {
+                console.error('Erro ao buscar eventos:', error);
+            }
+        };
+        fetchEventos();
+    }, [adminId]);
 
-    if (loading) {
-        return (
-            <div>Carregando eventos...</div>
-        );
-    }
+    // Função para excluir evento
+    const handleDeleteEvento = async (eventoId) => {
+        try {
+            await excluirEvento(eventoId);
+            setEventos(eventos.filter(evento => evento.id !== eventoId));
+        } catch (error) {
+            console.error('Erro ao excluir evento:', error);
+        }
+    };
 
-    if (error) {
-        return (
-            <div>{error}</div>
-        );
-    }
+    // Função para abrir o modal
+    const handleOpenModal = () => {
+        setModalShow(true);
+    };
+
+    // Função para fechar o modal
+    const handleCloseModal = () => {
+        setModalShow(false);
+    };
+
+    // Função para salvar o evento no modal
+    const handleSaveEvento = async (eventoData) => {
+        try {
+            const eventoCriado = await criarEvento(eventoData);
+            setEventos([...eventos, eventoCriado]);
+        } catch (error) {
+            console.error('Erro ao criar evento:', error);
+        }
+    };
 
     return (
-        <>
-          
-            <div>
-                <h1>Lista de Eventos</h1>
-                <ul>
-                    {eventos.map(evento => (
-                        <li key={evento.id} className="evento-item">
-                            <h2>{evento.nome}</h2>
-                            <p>{evento.descricao}</p>
-                            <p>{evento.data}</p>
-                            <p>{evento.localizacao}</p>
-                            <img src={evento.imagem} alt={evento.nome} className="evento-imagem" />
-                        </li>
-                    ))}
-                </ul>
-            </div>
-           
-        </>
+        <div>
+            <h2>Lista de Eventos</h2>
+            <button onClick={handleOpenModal}>Criar Novo Evento</button>
+
+            {/* Modal para criação de evento */}
+            <EventoModal
+                show={modalShow}
+                handleClose={handleCloseModal}
+                handleSave={handleSaveEvento}
+            />
+
+            {/* Exibir lista de eventos */}
+            {eventos.length > 0 ? (
+                eventos.map((evento) => (
+                    <EventoItem
+                        key={evento.id}
+                        evento={evento}
+                        onDelete={handleDeleteEvento}
+                    />
+                ))
+            ) : (
+                <p>Nenhum evento encontrado.</p>
+            )}
+        </div>
     );
 };
 

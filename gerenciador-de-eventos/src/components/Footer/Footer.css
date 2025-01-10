@@ -1,24 +1,40 @@
+/* Estilos gerais para o footer */
 .footer {
     background-color: #333;
-    color: #fff;
-    padding: 20px 0;
+    color: white;
+    padding: 20px;
     text-align: center;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
 }
 
-.footer a {
-    color: #fff;
+/* Alinhamento do conteúdo dentro do footer */
+.footer-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo para os links do footer */
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.footer-nav a {
+    color: white;
     text-decoration: none;
-    margin: 0 10px;
+    font-size: 16px;
 }
 
-.footer a:hover {
+.footer-nav a:hover {
     text-decoration: underline;
 }
 
+/* Estilo para a mensagem de copyright */
 .footer p {
-    margin: 0;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
