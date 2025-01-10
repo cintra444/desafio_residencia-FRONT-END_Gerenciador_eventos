@@ -4,28 +4,36 @@ import axios from 'axios';
 const api = axios.create({
   baseURL: "http://localhost:8080/",
   headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  });
+    'Content-Type': 'application/json',
+  },
+});
 
 // Função para cadastro administrador
 export const createAdmin = async (adminData) => {
   try {
-    const response = await api.post('/api/administradores/cadastro', adminData);
-    return response.data;
+    const response = await api.post('/api/administrador/cadastro', adminData);
+    return response;
   } catch (error) {
-   console.error("Erro ao cadastrar administrador", error);
-   throw error;
+    console.error("Erro ao cadastrar administrador", error.response ||error);
   }
+  if(error.response){
+    console.error('Status:', error.response.status);
+    console.error('Mensagem:', error.response.data);
+  }
+  throw error;
 }
 
 //Função para login administrador
 export const loginAdministrador = async (loginData) => {
   try {
-    const response = await api.post('/api/administradores/login', loginData);
+    const response = await api.post('/api/administrador/login', loginData);
     return response.data;
   } catch (error) {
-    console.error("Erro ao fazer login", error);
+    console.error("Erro ao fazer login", error.response || error);
+    if (error.response) {
+      console.error('Status:', error.response.status);
+      console.error('Mensagem:', error.response.data);
+    }
     throw error;
   }
 }
@@ -51,19 +59,14 @@ export const criarEvento = async (eventoData) => {
   formData.append('imagem', eventoData.imagem);
 
   try {
-    const response = await fetch('/api/eventos/criar',{
-      method: 'POST',
-      body: formData,
-    });
-    if(!response.ok){
-      throw new Error('Erro ao criar evento');
-    }
-    return await response.json();
-    } catch (error) {
-      console.error("Erro ao criar evento", error);
-      throw error;
-    }
-}
+    const response = await api.post('/api/eventos/criar', formData); // Usando axios
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao criar evento", error);
+    throw error;
+  }
+};
+
 
 //Função para atualizar evento
 export const atualizarEvento = async (eventoId, eventoData) => {
@@ -77,16 +80,16 @@ export const atualizarEvento = async (eventoId, eventoData) => {
 }
 
 //Função para excluir evento
-export const excluirEvento = async (eventoId) => {  
+export const excluirEvento = async (eventoId) => {
   try {
     const response = await api.delete(`/api/eventos/excluir/${eventoId}`);
-    return {message: 'Evento excluído com sucesso'};
+    return { message: 'Evento excluído com sucesso' };
   } catch (error) {
     console.error("Erro ao excluir evento", error);
     throw error;
-  } 
+  }
 }
-  
+
 //Função para listar eventos
 export const listarEventos = async () => {
   try {

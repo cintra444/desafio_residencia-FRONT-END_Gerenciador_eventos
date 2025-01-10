@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './CadastroPage.css';
+import { createAdmin } from '../../services/api';
 
 const CadastroPage = () => {
     const [formData, setFormData] = useState({
@@ -25,6 +25,7 @@ const CadastroPage = () => {
         e.preventDefault();
         const { nome, email, senha, confirmarSenha } = formData;
 
+        // Validação dos campos
         if (!nome || !email || !senha || !confirmarSenha) {
             alert('Preencha todos os campos!');
             return;
@@ -44,18 +45,13 @@ const CadastroPage = () => {
             setLoading(true);
             setError(null);
 
-            const response = await axios.post('/api/cadastro', {
-                nome,
-                email,
-                senha
-            });
-
-            if (response.status === 201) {
-                alert('Cadastro realizado com sucesso!');
-                navigate('/login');
-            }
+        
+           await createAdmin({ nome, email, senha });
+           alert('Cadastro realizado com sucesso!');
+           navigate('/login');
+           
         } catch (error) {
-            alert('Ocorreu um erro ao cadastrar o usuário!');
+            alert(`Ocorreu um erro ao cadastrar o usuário: ${error.response ? error.response.data.message : error.message}`);
             console.error(error);
         } finally {
             setLoading(false);
@@ -66,7 +62,7 @@ const CadastroPage = () => {
         <>
 
             <div className="cadastro-container">
-                <h2>Cadastro</h2>
+                <h2>Cadastro de Administrador</h2>
                 <form onSubmit={handleSubmit}>
                     {error && <p className="error-message">{error}</p>}
                     <div className="input-group">

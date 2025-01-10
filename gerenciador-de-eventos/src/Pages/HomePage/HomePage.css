@@ -1,19 +1,42 @@
-/* HomePage.css */
-.homepage {
-    padding: 20px;
+.home-page {
     text-align: center;
+    margin-top: 70px;
 }
 
-.homepage-buttons .button {
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
+.home-page h1 {
+    font-size: 2.5rem;
+    color: #333;
 }
 
-.homepage-buttons .button:hover {
-    background-color: #45a049;
+.home-div {
+    display: flex;
+    width: 70%;
+    margin: 0 auto;
+    flex-direction: column;
+    font-size: 1.2rem;
+    color: #666;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.home-page p {
+    font-size: 1.2rem;
+    color: #666;
+}
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .home-div {
+        width: 100%;
+        height: auto;
+        margin-top: 30px;
+    }
+
+    .home-page h1 {
+        font-size: 2rem;
+    }
+
+    .home-page p {
+        font-size: 1rem;
+    }
 }

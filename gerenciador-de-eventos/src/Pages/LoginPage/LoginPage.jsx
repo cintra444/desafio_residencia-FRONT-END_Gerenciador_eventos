@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../service/api'; // Importando a função de login
+import { loginAdministrador } from '../../services/api';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -12,24 +12,25 @@ const LoginPage = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        
+
         if (!email || !password) {
             setError('Por favor, preencha todos os campos!');
             return;
         }
 
         try {
-            const response = await login(email, password); // Usando a função do api.js
+            const loginData = { email, password };
+            const response = await loginAdministrador(loginData);
 
             if (response.token) {
                 setError('');
-                localStorage.setItem('token', response.token); // Armazenando o token
+                localStorage.setItem('token', response.token);
                 if (remember) {
                     localStorage.setItem('email', email);
                 } else {
                     localStorage.removeItem('email');
                 }
-                navigate(`/eventos/${response.adminId}`); // Redireciona após login
+                navigate(`/eventos/${response.adminId}`);
             } else {
                 setError('Email ou senha incorretos!');
             }
@@ -64,23 +65,23 @@ const LoginPage = () => {
                         required
                     />
                 </div>
-                <div className='form-group'>
+                <div className='form-group-checkbox'>
+                    <input
+                        type="checkbox"
+                        checked={remember}
+                        onChange={(e) => setRemember(e.target.checked)}
+                    />
                     <label>
-                        <input
-                            type="checkbox"
-                            checked={remember}
-                            onChange={(e) => setRemember(e.target.checked)}
-                        />
                         Gravar senha
                     </label>
                 </div>
                 <button type="submit" className='login-button'>Entrar</button>
             </form>
             <button
-                className='register-button'
+                className={`register-button ${error ? 'show-register' : ''}`}
                 onClick={() => navigate('/cadastro')}
             >
-                Cadastrar Administrador    
+                Cadastrar Administrador
             </button>
         </div>
     );
