@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../services/api';
+import './EventPage.css';
 
 const EventPage = () => {
     const { id } = useParams(); // Obtém o ID do evento da URL
@@ -11,24 +12,23 @@ const EventPage = () => {
         // Função para buscar o evento
         const fetchEventoDetails = async () => {
             try {
-                const response = await axios.get(`https://sua-api.com/eventos/${id}`);
-                setEvento(response.data); // Armazena os dados do evento
+                const response = await api.get(`/api/eventos/${id}`);
+                setEvento(response.data); 
             } catch (error) {
-                // Aqui você pode capturar o erro
                 console.error('Erro ao acessar a API:', error.response ? error.response.data : error.message);
-                setError('Ocorreu um erro ao carregar os dados do evento.'); // Definindo o erro para exibir na interface
+                setError('Ocorreu um erro ao carregar os dados do evento.'); 
             }
         };
 
         fetchEventoDetails();
-    }, [id]); // A requisição será feita sempre que o ID mudar
+    }, [id]); 
 
     if (error) {
-        return <div>{error}</div>; // Exibe a mensagem de erro se houver
+        return <div className='error-message'>{error}</div>; 
     }
 
     if (!evento) {
-        return <div>Carregando...</div>; // Exibe um texto enquanto os dados estão sendo carregados
+        return <div className='loading'>Carregando...</div>; 
     }
 
     return (
@@ -38,7 +38,7 @@ const EventPage = () => {
                 <p><strong>Data:</strong> {evento.data}</p>
                 <p><strong>Localização:</strong> {evento.localizacao}</p>
                 <div>
-                    <img src={evento.imagem} alt={evento.nome} />
+                    <img src={evento.imagem} alt={`Imagem do evento ${evento.nome}`} />
                 </div>
                 <p><strong>Descrição:</strong> {evento.descricao}</p>
             </div>

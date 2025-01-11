@@ -3,7 +3,7 @@ import './EventoItem.css';
 
 const EventoItem = ({ evento, onDelete }) => {
     const handleDeleteClick = () => {
-        onDelete(evento.id);
+        onDelete(evento.id); 
     };
 
     return (

@@ -8,20 +8,37 @@ const api = axios.create({
   },
 });
 
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+const handleApiError = (error) => {
+  if (error.response) {
+    console.error('Status:', error.response.status);
+    console.error('Mensagem:', error.response.data);
+  } else {
+    console.error('Erro:', error.message);
+  }
+  throw error;
+};
+
 // Função para cadastro administrador
 export const createAdmin = async (adminData) => {
   try {
     const response = await api.post('/api/administrador/cadastro', adminData);
     return response;
   } catch (error) {
-    console.error("Erro ao cadastrar administrador", error.response ||error);
+    console.error("Erro ao cadastrar administrador", error.response || error);
+    handleApiError(error);
   }
-  if(error.response){
-    console.error('Status:', error.response.status);
-    console.error('Mensagem:', error.response.data);
-  }
-  throw error;
-}
+  
+};
 
 //Função para login administrador
 export const loginAdministrador = async (loginData) => {
@@ -30,13 +47,9 @@ export const loginAdministrador = async (loginData) => {
     return response.data;
   } catch (error) {
     console.error("Erro ao fazer login", error.response || error);
-    if (error.response) {
-      console.error('Status:', error.response.status);
-      console.error('Mensagem:', error.response.data);
-    }
-    throw error;
+    handleApiError(error);
   }
-}
+};
 
 //Função para listar eventos de um administrador
 export const getEventos = async (adminId) => {
@@ -45,7 +58,7 @@ export const getEventos = async (adminId) => {
     return response.data;
   } catch (error) {
     console.error("Erro ao buscar eventos", error);
-    throw error;
+   handleApiError(error);
   }
 }
 
@@ -63,7 +76,7 @@ export const criarEvento = async (eventoData) => {
     return response.data;
   } catch (error) {
     console.error("Erro ao criar evento", error);
-    throw error;
+    handleApiError(error);
   }
 };
 
@@ -75,7 +88,7 @@ export const atualizarEvento = async (eventoId, eventoData) => {
     return response.data;
   } catch (error) {
     console.error("Erro ao atualizar evento", error);
-    throw error;
+    handleApiError(error);
   }
 }
 
@@ -86,7 +99,7 @@ export const excluirEvento = async (eventoId) => {
     return { message: 'Evento excluído com sucesso' };
   } catch (error) {
     console.error("Erro ao excluir evento", error);
-    throw error;
+    handleApiError(error);
   }
 }
 
@@ -97,7 +110,7 @@ export const listarEventos = async () => {
     return response.data;
   } catch (error) {
     console.error("Erro ao listar eventos", error);
-    throw error;
+    handleApiError(error);
   }
 }
 export default api;

@@ -1,57 +1,27 @@
 .evento-list-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 20px;
-    background-color: #f9f9f9;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.evento-item {
-    width: 100%;
-    max-width: 600px;
-    margin: 10px 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.evento-list-container h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 16px;
 }
 
-.evento-item h3 {
-    margin: 0 0 10px;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.evento-item p {
-    margin: 0;
-    font-size: 1em;
-    color: #666;
-}
-
-.evento-item .evento-date {
-    font-size: 0.9em;
-    color: #999;
-    margin-top: 5px;
-}
-
-.evento-item .evento-actions {
-    margin-top: 15px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.evento-item .evento-actions button {
-    padding: 8px 12px;
-    margin-left: 10px;
+.evento-list-container button {
+    display: block;
+    margin: 0 auto 20px;
+    background-color: #4caf50;
+    color: white;
     border: none;
-    border-radius: 3px;
+    padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 0.9em;
+    transition: background-color 0.3s;
 }
 
-.evento-item .evento-actions button:hover {
-    background-color: #0056b3;
+.evento-list-container button:hover {
+    background-color: #45a049;
 }

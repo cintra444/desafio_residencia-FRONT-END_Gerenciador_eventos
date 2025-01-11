@@ -18,79 +18,69 @@ const EventoModal = ({ show, handleClose, handleSave }) => {
         setEvento({ ...evento, imagem: e.target.files[0] });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Evita recarregamento da página
-
-        const { nome, data, localizacao, imagem } = evento;
-        
-        if (nome && data && localizacao && imagem) {
-            // Cria o evento com ID baseado no timestamp (não é ideal para produção, mas pode servir aqui)
-            const novoEvento = { 
-                id: Date.now(),
-                nome: nome, 
-                data: data, 
-                localizacao: localizacao, 
-                imagem: imagem
-            };
-            
-            // Chama a função handleSave passando o novo evento
-            handleSave(novoEvento);
-            handleClose(); // Fecha o modal após salvar
+    const handleSubmit = (e) => { 
+        e.preventDefault(); 
+        if(evento.nome && evento.data && evento.localizacao && evento.imagem) {
+            handleSave(evento);
+            handleClose();
         } else {
             alert('Preencha todos os campos!');
         }
-    };
+        };
 
+        if(!show) {
+            return null;
+        }
+        
     return (
         <>
             
             <div className='evento-modal'>
                 <div className='evento-modal-content'>
-                    <h2>Novo Evento</h2>
-                    <div className='evento-modal-body'>
+                    <h2>Criar Novo Evento</h2>
+                    <form onSubmit={handleSubmit}>
                         <label>Nome do Evento</label>
-                        <input
-                            type='text'
-                            name='nome'
-                            value={evento.nome}
-                            onChange={handleChange}
+                        <input 
+                        type='text' 
+                        name='nome' 
+                        value={evento.nome} 
+                        onChange={handleChange}
+                        required
                         />
-                    </div>
-                    <div className='evento-modal-body'>
                         <label>Data do Evento</label>
-                        <input
-                            type='date'
-                            name='data'
-                            value={evento.data}
-                            onChange={handleChange}
+                        <input 
+                        type='date' 
+                        name='data' 
+                        value={evento.data} 
+                        onChange={handleChange}
+                        required
                         />
-                    </div>
-                    <div className='evento-modal-body'>
                         <label>Localização do Evento</label>
-                        <input
-                            type='text'
-                            name='localizacao'
-                            value={evento.localizacao}
-                            onChange={handleChange}
+                        <input 
+                        type='text' 
+                        name='localizacao' 
+                        value={evento.localizacao} 
+                        onChange={handleChange}
+                        required
                         />
-                    </div>
-                    <div className='evento-modal-body'>
                         <label>Imagem do Evento</label>
-                        <input
-                            type='file'
-                            name='imagem'
-                            onChange={handleImageChange}
+                        <input 
+                        type='file' 
+                        name='imagem' 
+                        onChange={handleImageChange}
+                        required
                         />
-                    </div>
-                    <div className='evento-modal-actions'>
-                        <button className='modal-button' onClick={handleSubmit}>Salvar</button>
-                        <button className='modal-button-close' onClick={handleClose}>Cancelar</button>
-                    </div>
+                        <div className='evento-modal-actions'>
+
+                            <button className='modal-button' type='submit'>Salvar</button>
+                            <button className='modal-button' type='button' onClick={handleClose}>Cancelar</button>
+
+                        </div>
+                    </form>
                 </div>
-            </div>
-          
-        </>
-    );
-};
+                </div>
+                </>
+                );
+            };
 
 export default EventoModal;

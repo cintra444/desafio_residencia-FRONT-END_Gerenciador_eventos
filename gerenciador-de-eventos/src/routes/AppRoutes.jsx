@@ -18,6 +18,8 @@ const AppRoutes = () => {
                 <Route index element={<HomePage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/cadastro' element={<CadastroPage />} />
+                <Route path='/eventos/:id' element={<EventPage />} />
+
                 {/* Página para rotas não encontradas */}
                 <Route path='*' element={<NotFoundPage />} />
             </Routes>

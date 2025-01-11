@@ -36,7 +36,7 @@ const Cadastro = () => {
         }
 
         try {
-            await createAdmin(form);  // Apenas criando um novo administrador
+            await createAdmin(form);  
             console.log("Novo administrador criado");
         } catch (error) {
             console.error("Erro ao criar administrador:", error);

@@ -1,27 +1,43 @@
-/* EventoModal.css */
-.evento-modal {
+.evento-item {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s linear;
-}
-
-.evento-modal.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-.evento-modal-content {
-    background: white;
-    padding: 20px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    width: 400px;
+    padding: 16px;
+    margin: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.evento-imagem {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.evento-nome {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.evento-localizacao, .evento-data {
+    font-size: 0.9rem;
+    margin: 4px 0;
+}
+
+.evento-excluir-btn {
+    background-color: #ff5c5c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.evento-excluir-btn:hover {
+    background-color: #ff3b3b;
 }

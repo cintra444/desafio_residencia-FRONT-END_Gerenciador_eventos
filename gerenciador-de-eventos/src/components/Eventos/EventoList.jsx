@@ -30,21 +30,18 @@ const EventoList = ({ adminId }) => {
         }
     };
 
-    // Função para abrir o modal
     const handleOpenModal = () => {
         setModalShow(true);
     };
 
-    // Função para fechar o modal
     const handleCloseModal = () => {
         setModalShow(false);
     };
 
-    // Função para salvar o evento no modal
     const handleSaveEvento = async (eventoData) => {
         try {
-            const eventoCriado = await criarEvento(eventoData);
-            setEventos([...eventos, eventoCriado]);
+            const novoEvento = await criarEvento(eventoData);
+            setEventos([...eventos, novoEvento]);
         } catch (error) {
             console.error('Erro ao criar evento:', error);
         }
@@ -55,7 +52,6 @@ const EventoList = ({ adminId }) => {
             <h2>Lista de Eventos</h2>
             <button onClick={handleOpenModal}>Criar Novo Evento</button>
 
-            {/* Modal para criação de evento */}
             <EventoModal
                 show={modalShow}
                 handleClose={handleCloseModal}
@@ -74,7 +70,7 @@ const EventoList = ({ adminId }) => {
             ) : (
                 <p>Nenhum evento encontrado.</p>
             )}
-        </div>
+        </div> 
     );
 };
 

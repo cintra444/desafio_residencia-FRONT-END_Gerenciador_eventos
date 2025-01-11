@@ -1,26 +1,61 @@
+/* Estilo geral da página do evento */
 .event-page {
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Título do evento */
+.event-page h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 16px;
     text-align: center;
 }
 
-.event-page h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
+/* Texto informativo */
 .event-page p {
+    margin: 8px 0;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Destaque para rótulos como "Data", "Localização" */
+.event-page p strong {
+    color: #000;
+    font-weight: bold;
+}
+
+/* Container para a imagem */
+.event-page div img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+/* Mensagem de carregamento */
+.loading {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #888;
+    margin-top: 50px;
+}
+
+/* Mensagem de erro */
+.error-message {
+    text-align: center;
     font-size: 1.2rem;
-    margin: 10px 0;
-}
-
-.event-page img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-
-.event-page .error-message {
     color: red;
-    font-size: 1.2rem;
     margin-top: 20px;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 8px;
+    background-color: #ffe6e6;
 }

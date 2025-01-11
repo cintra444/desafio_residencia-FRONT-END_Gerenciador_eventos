@@ -18,7 +18,7 @@ const Navbar = () => {
         <nav className="navbar">
             <div className="navbar-brand">
                 <Link to="/" aria-label="Página inicial">Gerenciador de Eventos</Link>
-            </div>
+            </div> 
             <div className="navbar-links">
                 <Link to="/" aria-label="Página inicial">Home</Link>
                 {isAuthenticated && <Link to="/eventos" aria-label="Eventos">Eventos</Link>}
