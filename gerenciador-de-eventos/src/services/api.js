@@ -43,7 +43,9 @@ export const createAdmin = async (adminData) => {
 //Função para login administrador
 export const loginAdministrador = async (loginData) => {
   try {
+    console.log('Dados do login:', loginData);
     const response = await api.post('/api/administrador/login', loginData);
+    console.log('Resposta da api:', response);
     return response.data;
   } catch (error) {
     console.error("Erro ao fazer login", error.response || error);

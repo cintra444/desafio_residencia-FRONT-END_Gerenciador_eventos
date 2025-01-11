@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 import './EventPage.css';
 
 const EventPage = () => {
     const { id } = useParams(); // Obtém o ID do evento da URL
     const [evento, setEvento] = useState(null);
-    const [error, setError] = useState(null); // Armazena o erro
+    const [error, setError] = useState(null); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Função para buscar o evento
@@ -41,6 +43,8 @@ const EventPage = () => {
                     <img src={evento.imagem} alt={`Imagem do evento ${evento.nome}`} />
                 </div>
                 <p><strong>Descrição:</strong> {evento.descricao}</p>
+
+               
             </div>
         </>
     );

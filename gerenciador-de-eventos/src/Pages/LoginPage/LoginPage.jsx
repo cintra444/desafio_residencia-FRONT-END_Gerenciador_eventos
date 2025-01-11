@@ -17,12 +17,14 @@ const LoginPage = () => {
             setError('Por favor, preencha todos os campos!');
             return;
         }
+        console.log('Email:', email);
+console.log('Password:', password);
 
         try {
             const loginData = { email, password };
             const response = await loginAdministrador(loginData);
 
-            if (response.token) {
+            if(response && response.token) {
                 setError('');
                 localStorage.setItem('token', response.token);
                 if (remember) {
@@ -34,11 +36,12 @@ const LoginPage = () => {
             } else {
                 setError('Email ou senha incorretos!');
             }
-        } catch (error) {
-            console.error('Erro ao fazer login:', error);
-            setError('Erro ao fazer login. Tente novamente.');
-        }
+            } catch (error) {
+                console.error('Erro ao fazer login:', error);
+                setError('Erro ao fazer login. Tente novamente.');
+            }
     };
+          
 
     return (
         <div className="login-page">
